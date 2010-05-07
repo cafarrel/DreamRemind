@@ -20,9 +20,13 @@ class ApplicationController < ActionController::Base
   
   def current_user
     return session[:user]
-  end
-  
+  end  
   helper_method :current_user
+  
+  def logged_in?
+    return current_user != nil
+  end
+  helper_method :logged_in?
   
   def authorization_required
     if !allowed_to_view

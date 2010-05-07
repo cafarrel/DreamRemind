@@ -1,5 +1,25 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :users
+  map.resources :reminders, :belongs_to => :users, :path_prefix => '/users/:id', :except => :index
+
+  map.resources :users, :has_many => :reminders, :except => :index
+
+  map.login '/login', :controller => 'users', :action => 'login'
+  map.logout '/logout', :controller => 'users', :action => 'logout'
+  
+  map.forgot_password '/forgot_password', :controller => 'users', :action => 'forgot_password'
+  map.change_password '/:id/edit/change_password', :controller => 'users', :action => 'change_password'
+  
+  #map.username '/:id', :controller => 'users', :action => 'index'  
+  
+  map.root :controller => 'users', :action => 'show'
+
+  # See how all your routes lay out with "rake routes"
+  
+  # Install the default routes as the lowest priority.
+  # Note: These default routes make all actions in every controller accessible via GET requests. You should
+  # consider removing or commenting them out if you're using named routes and resources.
+  #map.connect ':controller/:action/:id'
+  #map.connect ':controller/:action/:id.:format'
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -35,19 +55,4 @@ ActionController::Routing::Routes.draw do |map|
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   # map.root :controller => "welcome"
 
-  # See how all your routes lay out with "rake routes"
-
-  map.login '/login', :controller => 'users', :action => 'login'
-  map.logout '/logout', :controller => 'users', :action => 'logout'
-  
-  map.forgot_password '/forgot_password', :controller => 'users', :action => 'forgot_password'
-  map.change_password '/users/:id/edit/change_password', :controller => 'users', :action => 'change_password'
-  
-  #map.username '/:id', :controller => 'users', :action => 'show'
-  
-  # Install the default routes as the lowest priority.
-  # Note: These default routes make all actions in every controller accessible via GET requests. You should
-  # consider removing or commenting them out if you're using named routes and resources.
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
 end

@@ -19,6 +19,8 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+  has_many :reminders
+  
   validates_length_of :username, :within => 3..40
   
   validates_length_of :password, :within => 5..40, :on => :update, :if => :password_required?
@@ -39,7 +41,7 @@ class User < ActiveRecord::Base
   attr_accessor :password, :password_confirmation
   
   def to_param
-    username || id
+    username
   end
 
   def password=(pass)

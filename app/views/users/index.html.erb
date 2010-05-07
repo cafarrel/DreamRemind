@@ -1,41 +1,37 @@
 <h1>Dream Remind</h1>
 <% if logged_in? %>
-	<h3>Welcome, <%= current_user.username %></h3>
+	<h2>Welcome, <%= current_user.username %></h2><br />
+
+	<strong>Reminders</strong>
+	<%= link_to '(add new reminder)', new_user_reminder_path(current_user) %><br /><br />
+	
+	<table>
+	  <tr>
+	    <th>Category</th>
+	    <th>Date</th>
+	    <th>Description</th>
+	  </tr>
+	
+	<% @reminders.each do |reminder| %>
+	  <tr>
+	  	<td><%=h reminder.user_id %></td>
+	    <td><%=h reminder.category_id %></td>
+	    <td><%=h pretty_date(reminder.date) %></td>
+	    <td><%=h reminder.description %></td>  	    
+		<td><%= link_to 'Edit', edit_user_reminder_path(@user, reminder) %></td>    
+	    <td><%= link_to 'Destroy', username_path(@user), :confirm => 'Are you sure?', :method => :delete %></td>
+	  </tr>
+	<% end %>
+	</table>
+		
+	<br />
+
+	<%= link_to 'Edit Profile', edit_user_path(@user) %> |
+	<%= link_to 'Logout', logout_path %>
 <% end %>
 
-<table>
-  <tr>
-    <th>First name</th>
-    <th>Last name</th>
-    <th>Gender</th>
-    <th>Birthday</th>
-    <th>Username</th>
-    <th>Email</th>
-  </tr>
-
-<% @users.each do |user| %>
-  <tr>
-    <td><%=h user.first_name %></td>
-    <td><%=h user.last_name %></td>
-    <td><%=h user.gender %></td>
-    <td><%=h pretty_date(user.birthday) %></td>
-    <td><%=h user.username %></td>    
-    <td><%=h user.email %></td>    
-    <td><%= link_to 'Show', user_path(user) %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<% if logged_in? %>
-	<%= link_to 'Logout', logout_path %> |	
-<% end %>
 <% if !logged_in? %>
-	<%= link_to 'Login', login_path %> |
+	<%= link_to 'Login', login_path %> |	
 	<%= link_to 'Forgot Password', forgot_password_path %> |
+	<%= link_to 'New user', new_user_path %>
 <% end %>         
-
-<%= link_to 'New user', new_user_path %>

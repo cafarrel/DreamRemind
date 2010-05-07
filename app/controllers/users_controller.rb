@@ -8,8 +8,8 @@ class UsersController < ApplicationController
     if request.post?
       if session[:user] = User.authenticate(params[:user][:username], params[:user][:password])
         flash[:notice] = "Login Successful"
-        redirect_to_stored
-        #redirect_to current_user
+        #redirect_to username_path(current_user.username)
+        redirect_to current_user
       else
         flash[:notice] = "Login Unsuccessful"
       end
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
       u = User.find_by_email(params[:user][:email])
       if u and u.send_new_password
         flash[:notice] = "A new password has been sent to " << u.email
-        redirect_to '/login'
+        redirect_to login_path
       else
         flash[:notice] = "Couldn't send password"
       end
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
       @user.update_attributes(:password=>params[:user][:password], :password_confirmation => params[:user][:password_confirmation])
       if @user.save
         flash[:notice] = "Password Successfully Changed!"
-        redirect_to_stored
+        redirect_to edit_user_path
       end
     else
       respond_to do |format|
@@ -55,8 +55,14 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    @users = User.all
-
+    @user = nil
+    @reminders = nil
+    
+    if logged_in?
+      @user = current_user
+      @reminders = Reminder.find(:all, :conditions => ["user_id = ?", @user.id])  
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @users }
@@ -66,7 +72,13 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show    
-    @user = User.find_by_identifier(params[:id])
+    @user = nil
+    @reminders = nil
+    
+    if logged_in?
+      @user = User.find_by_identifier(params[:id])
+      @reminders = Reminder.find(:all, :conditions => ["user_id = ?", @user.id])  
+    end    
 
     respond_to do |format|
       format.html # show.html.erb

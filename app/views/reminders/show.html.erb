@@ -1,0 +1,23 @@
+<p>
+  <b>User:</b>
+  <%=h @reminder.user_id %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%=h @reminder.category_id %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%=h pretty_date(@reminder.date) %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @reminder.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_reminder_path(current_user, @reminder) %> |
+<%= link_to 'Back', current_user %>
