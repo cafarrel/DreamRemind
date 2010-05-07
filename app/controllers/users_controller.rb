@@ -5,9 +5,6 @@ class UsersController < ApplicationController
   
   def login
     
-    @flash = flash
-    @session = session
-    
     if request.post?
       if session[:user] = User.authenticate(params[:user][:username], params[:user][:password])
         flash[:notice] = "Login Successful"
