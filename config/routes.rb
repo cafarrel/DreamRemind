@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :reminders, :belongs_to => :users, :path_prefix => '/users/:id', :except => :index
 
-  map.resources :users, :has_many => :reminders, :except => :index
+  map.resources :users, :has_many => :reminders
 
   map.login '/login', :controller => 'users', :action => 'login'
   map.logout '/logout', :controller => 'users', :action => 'logout'
@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   
   #map.username '/:id', :controller => 'users', :action => 'index'  
   
-  map.root :controller => 'users', :action => 'show'
+  map.root :controller => 'users', :action => 'index'
 
   # See how all your routes lay out with "rake routes"
   
