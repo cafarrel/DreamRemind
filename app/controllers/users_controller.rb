@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   def logout
     session[:user] = nil    
     flash[:notice] = "Successfully Logged Out"
-    redirect_to :action => 'index'
+    redirect_to :root, :action => 'index'
     #redirect_to :action => 'login'
   end
   

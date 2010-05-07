@@ -19,7 +19,7 @@
 	    <td><%=h pretty_date(reminder.date) %></td>
 	    <td><%=h reminder.description %></td>  	    
 		<td><%= link_to 'Edit', edit_user_reminder_path(@user, reminder) %></td>    
-	    <td><%= link_to 'Destroy', username_path(@user), :confirm => 'Are you sure?', :method => :delete %></td>
+	    <td><%= link_to 'Destroy', user_path(@user), :confirm => 'Are you sure?', :method => :delete %></td>
 	  </tr>
 	<% end %>
 	</table>
