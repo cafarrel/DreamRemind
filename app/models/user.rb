@@ -90,6 +90,6 @@ class User < ActiveRecord::Base
   end
   
   def password_required?
-    !hashed_password.nil?
+    !password.blank?
   end
 end

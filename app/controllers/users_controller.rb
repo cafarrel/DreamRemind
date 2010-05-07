@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   end
 
   def change_password    
-    @user = User.find_by_identifier(params[:id])
+    @user = User.find_by_username(params[:id])
     puts @user.inspect
     if request.post? || request.put?    
       @user.update_attributes(:password=>params[:user][:password], :password_confirmation => params[:user][:password_confirmation])
@@ -76,7 +76,7 @@ class UsersController < ApplicationController
     @reminders = nil
     
     if logged_in?
-      @user = User.find_by_identifier(params[:id])
+      @user = User.find_by_username(params[:id])
       @reminders = Reminder.find(:all, :conditions => ["user_id = ?", @user.id])  
     end    
 
@@ -99,7 +99,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit    
-    @user = User.find_by_identifier(params[:id])
+    @user = User.find_by_username(params[:id])
   end
 
   # POST /users
@@ -123,15 +123,15 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    @user = User.find_by_identifier(params[:id])
-
+    @user = User.find_by_username(params[:id])
+    
     respond_to do |format|
       if @user.update_attributes(params[:user])        
         flash[:notice] = 'User was successfully updated.'
         format.html { redirect_to(@user) }
         format.xml  { head :ok }
       else      
-        flash[:notice] = 'Failed to update user.'
+        #flash[:notice] = 'Failed to update user.'
         format.html { render :action => "edit" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
@@ -141,7 +141,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.xml
   def destroy
-    @user = User.find_by_identifier(params[:id])
+    @user = User.find_by_username(params[:id])
     @user.destroy
 
     session[:user] = nil
@@ -151,8 +151,4 @@ class UsersController < ApplicationController
       format.xml  { head :ok }
     end
   end  
-     
-  def skip_password_validation(user)
-    user.password = user.password_confirmation = '-' * 5
-  end
 end
