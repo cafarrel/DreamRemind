@@ -20,6 +20,7 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   has_many :reminders
+  has_many :categories
   
   validates_length_of :username, :within => 3..40
   
@@ -70,6 +71,9 @@ class User < ActiveRecord::Base
     Notifications.deliver_forgot_password(self.email, self.username, new_pass)
   end
   
+  def send_registration_notification
+    Notifications.deliver_registration_notification(self.email, self.username)
+  end
   
   protected
   

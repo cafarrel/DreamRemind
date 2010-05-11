@@ -77,7 +77,7 @@ class UsersController < ApplicationController
     
     if logged_in?
       @user = User.find_by_username(params[:id])
-      @reminders = Reminder.find(:all, :conditions => ["user_id = ?", @user.id])  
+      @reminders = Reminder.find(:all, :conditions => ["user_id = ?", @user.id])      
     end    
 
     respond_to do |format|
@@ -108,7 +108,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
     respond_to do |format|
-      if @user.save
+      if @user.save and @user.send_registration_notification
         flash[:notice] = 'User was successfully created.'
         session[:user] = @user
         format.html { redirect_to(@user) }

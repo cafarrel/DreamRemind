@@ -1,0 +1,6 @@
+Category.create(:name => "Birthday")
+Category.create(:name => "Anniversary")
+Category.create(:name => "Holiday")
+Category.create(:name => "Appointment")
+Category.create(:name => "Meeting")
+Category.create(:name => "Other")

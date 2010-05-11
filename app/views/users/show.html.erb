@@ -13,9 +13,8 @@
 	  </tr>
 	
 	<% @reminders.each do |reminder| %>
-	  <tr>
-	  	<td><%=h reminder.user_id %></td>
-	    <td><%=h reminder.category_id %></td>
+	  <tr>	  	
+	    <td><%=h reminder.category.name %></td>
 	    <td><%=h pretty_date(reminder.date) %></td>
 	    <td><%=h reminder.description %></td>
 		<td><%= link_to 'View', user_reminder_path(@user, reminder) %></td>  	    
@@ -28,6 +27,7 @@
 	<br />
 
 	<%= link_to 'Edit Profile', edit_user_path(@user) %> |
+	<%= link_to 'Manage Categories', '#' %> |
 	<%= link_to 'Logout', logout_path %>
 <% end %>
 

@@ -15,6 +15,7 @@ class RemindersController < ApplicationController
   # GET /reminders/1.xml
   def show
     @reminder = Reminder.find(params[:id])
+    @category = Category.find(:first, :conditions => ["id = ?", @reminder.category_id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,6 +27,7 @@ class RemindersController < ApplicationController
   # GET /reminders/new.xml
   def new
     @reminder = Reminder.new
+    @categories = Category.find(:all)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,6 +38,7 @@ class RemindersController < ApplicationController
   # GET /reminders/1/edit
   def edit
     @reminder = Reminder.find(params[:id])
+    @categories = Category.find(:all)
   end
 
   # POST /reminders

@@ -3,13 +3,12 @@
 <% form_for(@reminder) do |f| %>
   <%= f.error_messages %>
 
-  <p>
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %>
+  <p>    
+    <%= f.hidden_field :user_id, :value => current_user.id %>
   </p>
   <p>
     <%= f.label :category_id %><br />
-    <%= f.text_field :category_id %>
+    <%= f.select :category_id, @categories.map {|u| [u.name, u.id]} %>
   </p>
   <p>
     <%= f.label :date %><br />
