@@ -42,14 +42,14 @@ Rails::Initializer.run do |config|
 end
 
 # ActionMailer settings
-ActionMailer::Base.delivery_method = :smtp
-
-ActionMailer::Base.smtp_settings = {
- :address => "smtp.gmail.com",   
- :port => 587,   
- :authentication => :plain,
- :enable_starttls_auto => true,
- :tls => true,
- :user_name => "dreamreminder@gmail.com",
- :password => "bdayreminder",
-}
+#ActionMailer::Base.delivery_method = :smtp
+#
+#ActionMailer::Base.smtp_settings = {
+# :address => "smtp.gmail.com",   
+# :port => 587,   
+# :authentication => :plain,
+# :enable_starttls_auto => true,
+# :tls => true,
+# :user_name => "dreamreminder@gmail.com",
+# :password => "bdayreminder",
+#}
