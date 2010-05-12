@@ -23,15 +23,28 @@ class ApplicationController < ActionController::Base
   end  
   helper_method :current_user
   
+  def has_reminders?
+    return current_user.reminders.size > 0
+  end
+  helper_method :has_reminders?
+  
   def logged_in?
     return current_user != nil
   end
   helper_method :logged_in?
   
-  def authorization_required
-    if !allowed_to_view
+  def user_authorization_required
+    if !allowed_to_view_user_action?
       flash[:notice] = "You are not allowed to access that page!"      
       redirect_to_stored
+      return
+    end
+  end
+  
+  def reminder_authorization_required
+    if !allowed_to_view_reminder_action?
+      flash[:notice] = "You are not allowed to access that page!"      
+      redirect_stored
       return
     end
   end
@@ -45,8 +58,18 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def allowed_to_view    
+  def redirect_back
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to :controller => 'users', :action => 'index'
+  end
+  
+  def allowed_to_view_user_action?    
     return current_user.id.to_s == params[:id] || current_user.username == params[:id]
-  end     
+  end   
+  
+  def allowed_to_view_reminder_action?
+    return current_user.id.to_s == params[:user_id] || current_user.username == params[:user_id]
+  end
 
 end

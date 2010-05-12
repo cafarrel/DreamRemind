@@ -1,0 +1,15 @@
+<h1>New Category</h1>
+
+<% form_for(@category, :url => user_categories_path(@user)) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', user_categories_path(current_user) %>

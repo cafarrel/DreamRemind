@@ -19,8 +19,9 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  has_many :reminders
-  has_many :categories
+  has_many :reminders, :dependent => :destroy
+  has_many :user_categories, :dependent => :destroy
+  has_many :categories, :through => :user_categories
   
   validates_length_of :username, :within => 3..40
   

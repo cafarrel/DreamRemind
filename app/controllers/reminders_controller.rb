@@ -1,8 +1,11 @@
 class RemindersController < ApplicationController
+  
+  before_filter :reminder_authorization_required, :only => ['new', 'index', 'show', 'edit', 'create', 'update', 'destroy']
+  
   # GET /reminders
   # GET /reminders.xml
   def index
-    @user = User.find_by_identifier(params[:id])
+    @user = User.find_by_username(params[:user_id])
     @reminders = Reminder.find(:all, :conditions => ["user_id = ?", @user.id])
 
     respond_to do |format|
@@ -26,8 +29,9 @@ class RemindersController < ApplicationController
   # GET /reminders/new
   # GET /reminders/new.xml
   def new
-    @reminder = Reminder.new
-    @categories = Category.find(:all)
+    @reminder = Reminder.new    
+    @user = User.find_by_username(params[:user_id])
+    @categories = @user.categories
 
     respond_to do |format|
       format.html # new.html.erb
@@ -39,21 +43,23 @@ class RemindersController < ApplicationController
   def edit
     @reminder = Reminder.find(params[:id])
     @categories = Category.find(:all)
+    @user = User.find_by_username(params[:user_id])
   end
 
   # POST /reminders
   # POST /reminders.xml
   def create
+    @user = User.find_by_username(params[:user_id])
     @reminder = Reminder.new(params[:reminder])
 
     respond_to do |format|
       if @reminder.save
-        flash[:notice] = 'Reminder was successfully created.'
-        format.html { redirect_to(@reminder) }
-        format.xml  { render :xml => @reminder, :status => :created, :location => @reminder }
+        flash[:notice] = 'Reminder was successfully created.'        
+        format.html { redirect_to @user }
+        #format.xml  { render :xml => @reminder, :status => :created, :location => @reminder }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @reminder.errors, :status => :unprocessable_entity }
+        #format.html { render :action => "new" }
+        #format.xml  { render :xml => @reminder.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -66,7 +72,7 @@ class RemindersController < ApplicationController
     respond_to do |format|
       if @reminder.update_attributes(params[:reminder])
         flash[:notice] = 'Reminder was successfully updated.'
-        format.html { redirect_to(@reminder) }
+        format.html { redirect_to(current_user) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -80,9 +86,12 @@ class RemindersController < ApplicationController
   def destroy
     @reminder = Reminder.find(params[:id])
     @reminder.destroy
+    @user = User.find_by_username(params[:user_id])
+    
+    flash[:notice] = 'Reminder successfully deleted.'
 
     respond_to do |format|
-      format.html { redirect_to(reminders_url) }
+      format.html { redirect_to user_path(@user) }
       format.xml  { head :ok }
     end
   end

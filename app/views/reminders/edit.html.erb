@@ -1,6 +1,6 @@
 <h1>Editing reminder</h1>
 
-<% form_for(@reminder) do |f| %>
+<% form_for(@reminder, :url => user_reminder_path(@user, @reminder)) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -20,4 +20,4 @@
   </p>
 <% end %>
 
-<%= link_to 'Back', current_user %>
+<%= link_to 'Back', @user %>

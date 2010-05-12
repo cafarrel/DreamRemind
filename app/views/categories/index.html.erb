@@ -1,0 +1,15 @@
+<h1>Categories for <%= @user.username %></h1>
+
+<table>
+  
+<% @user_categories.each do |category| %>
+  <tr>
+  	<td><strong><%=h category.name %></strong></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Back', @user %> |
+<%= link_to 'New Category', new_user_category_path(@user) %>

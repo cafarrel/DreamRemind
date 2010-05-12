@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
-  before_filter :login_required, :only => ['welcome', 'change_password', 'hidden', 'show', 'edit']
-  before_filter :authorization_required, :only => ['show', 'edit', 'update', 'destroy']
+  before_filter :login_required, :only => ['change_password', 'show', 'edit', 'update', 'destroy']
+  before_filter :user_authorization_required, :only => ['show', 'edit', 'update', 'destroy']
   
   def login
     
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     session[:user] = nil    
     flash[:notice] = "Successfully Logged Out"
     redirect_to :root, :action => 'index'
-    #redirect_to :action => 'login'
+    #redirect_to :root, :controller => 'user', :action => 'index'
   end
   
   def forgot_password
@@ -54,18 +54,14 @@ class UsersController < ApplicationController
   
   # GET /users
   # GET /users.xml
-  def index
-    @user = nil
-    @reminders = nil
-    
+  def index    
     if logged_in?
-      @user = current_user
-      @reminders = Reminder.find(:all, :conditions => ["user_id = ?", @user.id])  
-    end
-    
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @users }
+      redirect_to current_user
+    else    
+      respond_to do |format|
+        format.html # index.html.erb
+        format.xml  { render :xml => @users }
+      end
     end
   end
 
@@ -109,6 +105,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save and @user.send_registration_notification
+        UserCategory.populate_initial_categories(@user.id)        
         flash[:notice] = 'User was successfully created.'
         session[:user] = @user
         format.html { redirect_to(@user) }
@@ -147,7 +144,7 @@ class UsersController < ApplicationController
     session[:user] = nil
 
     respond_to do |format|
-      format.html { redirect_to(users_url) }
+      format.html { redirect_to :root }
       format.xml  { head :ok }
     end
   end  

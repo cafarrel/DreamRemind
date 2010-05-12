@@ -1,12 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :reminders, :belongs_to => :users, :path_prefix => '/users/:id', :except => :index
-  map.resources :users, :has_many => :reminders, :except => :index
+  #map.resources :reminders, :belongs_to => :users, :path_prefix => '/users/:id', :except => :index
+  map.resources :users, :has_many => [:reminders, :categories], :except => :index
   
-  map.categories '/categories', :controller => 'categories', :action => 'index', :path_prefix => '/users/:id'
+  #map.categories '/categories', :controller => 'categories', :action => 'index', :path_prefix => '/users/:id'
   
-  
-  
-
   map.login '/login', :controller => 'users', :action => 'login'
   map.logout '/logout', :controller => 'users', :action => 'logout'
   

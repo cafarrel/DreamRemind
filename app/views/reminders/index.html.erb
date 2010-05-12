@@ -14,9 +14,9 @@
     <td><%=h reminder.category_id %></td>
     <td><%=h pretty_date(reminder.date) %></td>
     <td><%=h reminder.description %></td>
-    <td><%= link_to 'Show', reminder %></td>
-    <td><%= link_to 'Edit', edit_reminder_path(reminder) %></td>
-    <td><%= link_to 'Destroy', reminder, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Show', user_reminder_path(@user, reminder) %></td>
+    <td><%= link_to 'Edit', edit_user_reminder_path(@user, reminder) %></td>
+    <td><%= link_to 'Destroy', user_reminder_path(@user, reminder), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
@@ -24,4 +24,4 @@
 <br />
 
 <%= link_to 'Profile', @user %> |
-<%= link_to 'New reminder', new_reminder_path %>
+<%= link_to 'New reminder', new_user_reminder_path(@user) %>
