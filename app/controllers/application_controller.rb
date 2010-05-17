@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     if session[:user]
       return true
     end
-    flash[:notice] = 'Please login to continue'
+    flash[:info] = 'Please login to continue'
     session[:return_to] = request.request_uri
     redirect_to login_path
     return false
@@ -33,24 +33,8 @@ class ApplicationController < ActionController::Base
   end
   helper_method :logged_in?
   
-  def user_authorization_required
-    if !allowed_to_view_user_action?
-      flash[:notice] = "You are not allowed to access that page!"      
-      redirect_to_stored
-      return
-    end
-  end
-  
-  def reminder_authorization_required
-    if !allowed_to_view_reminder_action?
-      flash[:notice] = "You are not allowed to access that page!"      
-      redirect_stored
-      return
-    end
-  end
-     
   def redirect_to_stored
-    if return_to = session[:return_to]
+    if return_to = session[:return_to]      
       session[:return_to]=nil
       redirect_to(return_to)
     else
@@ -64,12 +48,8 @@ class ApplicationController < ActionController::Base
     redirect_to :controller => 'users', :action => 'index'
   end
   
-  def allowed_to_view_user_action?    
-    return current_user.id.to_s == params[:id] || current_user.username == params[:id]
-  end   
+
   
-  def allowed_to_view_reminder_action?
-    return current_user.id.to_s == params[:user_id] || current_user.username == params[:user_id]
-  end
+  
 
 end

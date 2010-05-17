@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20100511202129) do
     t.datetime "updated_at"
   end
 
-  create_table "user_categories", :id => false, :force => true do |t|
+  create_table "user_categories", :force => true do |t|
     t.integer  "category_id"
     t.integer  "user_id"
     t.datetime "created_at"

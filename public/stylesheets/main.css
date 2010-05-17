@@ -1,0 +1,100 @@
+body { background-color: #fff; color: #333; }
+
+body, p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   13px;
+  line-height: 18px;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a { color: #000; }
+a:visited { color: #666; }
+a:hover { color: #fff; background-color:#000; }
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+ul.list-pin {
+	margin: 0;
+	padding: 0;
+}
+
+ul.list-pin li {
+	margin: 0;
+	padding: 0 0 0 16px;
+	list-style: none;
+	background: url('../images/list_icons/pin.jpg') no-repeat left center;
+}
+
+div.info, div.success, div.warning, div.error {
+	border: 1px solid;
+	margin: 10px 0px;
+	padding: 15px 10px 15px 50px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	width: 500px;
+}
+
+div.info {
+	color: #00529B;
+	background-color: #BDE5F8;
+	background-image: url('../images/message_icons/info.png');	
+}
+
+div.success {
+	color: #4F8A10;
+	background-color: #DFF2BF;
+	background-image: url('../images/message_icons/success.png');
+}
+
+div.warning {
+	color: #9F6000;
+	background-color: #FEEFB3;
+	background-image: url('../images/message_icons/warning.png');
+}
+
+div.error {
+	color: #D8000C;
+	background-color: #FFBABA;
+	background-image: url('../images/message_icons/error.png');	
+}
+
+

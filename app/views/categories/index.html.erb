@@ -1,13 +1,14 @@
 <h1>Categories for <%= @user.username %></h1>
 
-<table>
+<div>
   
-<% @user_categories.each do |category| %>
-  <tr>
-  	<td><strong><%=h category.name %></strong></td>
-  </tr>
-<% end %>
-</table>
+  <ul class="list-pin">
+	<% @user_categories.each do |category| %>	  
+	  	<li><strong><%=h category.name %></strong></li>	  
+	<% end %>
+  </ul>
+
+</div>
 
 <br />
 

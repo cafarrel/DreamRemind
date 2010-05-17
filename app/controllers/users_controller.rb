@@ -7,18 +7,18 @@ class UsersController < ApplicationController
     
     if request.post?
       if session[:user] = User.authenticate(params[:user][:username], params[:user][:password])
-        flash[:notice] = "Login Successful"
+        flash[:info] = "Login Successful"
         #redirect_to username_path(current_user.username)
-        redirect_to current_user
+        redirect_to_stored
       else
-        flash[:notice] = "Login Unsuccessful"
+        flash[:error] = "Login Unsuccessful"
       end
     end
   end
   
   def logout
     session[:user] = nil    
-    flash[:notice] = "Successfully Logged Out"
+    flash[:info] = "Successfully Logged Out"
     redirect_to :root, :action => 'index'
     #redirect_to :root, :controller => 'user', :action => 'index'
   end
@@ -27,10 +27,10 @@ class UsersController < ApplicationController
     if request.post?
       u = User.find_by_email(params[:user][:email])
       if u and u.send_new_password
-        flash[:notice] = "A new password has been sent to " << u.email
+        flash[:success] = "A new password has been sent to " << u.email
         redirect_to login_path
       else
-        flash[:notice] = "Couldn't send password"
+        flash[:error] = "Couldn't send password"
       end
     end
   end
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     if request.post? || request.put?    
       @user.update_attributes(:password=>params[:user][:password], :password_confirmation => params[:user][:password_confirmation])
       if @user.save
-        flash[:notice] = "Password Successfully Changed!"
+        flash[:success] = "Password Successfully Changed!"
         redirect_to edit_user_path
       end
     else
@@ -104,9 +104,10 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
     respond_to do |format|
-      if @user.save and @user.send_registration_notification
+      if @user.save 
+        @user.send_registration_notification
         UserCategory.populate_initial_categories(@user.id)        
-        flash[:notice] = 'User was successfully created.'
+        flash[:success] = 'User was successfully created.'
         session[:user] = @user
         format.html { redirect_to(@user) }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
@@ -124,11 +125,11 @@ class UsersController < ApplicationController
     
     respond_to do |format|
       if @user.update_attributes(params[:user])        
-        flash[:notice] = 'User was successfully updated.'
+        flash[:success] = 'User was successfully updated.'
         format.html { redirect_to(@user) }
         format.xml  { head :ok }
       else      
-        #flash[:notice] = 'Failed to update user.'
+        #flash[:error] = 'Failed to update user.'
         format.html { render :action => "edit" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
@@ -147,5 +148,17 @@ class UsersController < ApplicationController
       format.html { redirect_to :root }
       format.xml  { head :ok }
     end
-  end  
+  end
+  
+  def user_authorization_required
+    if !allowed_to_view_user_action?
+      flash[:error] = "You are not allowed to access that page!"      
+      redirect_to_stored
+      return
+    end
+  end     
+  
+  def allowed_to_view_user_action?    
+    return current_user.id.to_s == params[:id] || current_user.username == params[:id]
+  end   
 end

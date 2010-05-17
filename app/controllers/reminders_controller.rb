@@ -1,5 +1,6 @@
 class RemindersController < ApplicationController
   
+  before_filter :login_required
   before_filter :reminder_authorization_required, :only => ['new', 'index', 'show', 'edit', 'create', 'update', 'destroy']
   
   # GET /reminders
@@ -54,7 +55,7 @@ class RemindersController < ApplicationController
 
     respond_to do |format|
       if @reminder.save
-        flash[:notice] = 'Reminder was successfully created.'        
+        flash[:success] = 'Reminder was successfully created.'        
         format.html { redirect_to @user }
         #format.xml  { render :xml => @reminder, :status => :created, :location => @reminder }
       else
@@ -71,7 +72,7 @@ class RemindersController < ApplicationController
 
     respond_to do |format|
       if @reminder.update_attributes(params[:reminder])
-        flash[:notice] = 'Reminder was successfully updated.'
+        flash[:success] = 'Reminder was successfully updated.'
         format.html { redirect_to(current_user) }
         format.xml  { head :ok }
       else
@@ -88,11 +89,23 @@ class RemindersController < ApplicationController
     @reminder.destroy
     @user = User.find_by_username(params[:user_id])
     
-    flash[:notice] = 'Reminder successfully deleted.'
+    flash[:success] = 'Reminder successfully deleted.'
 
     respond_to do |format|
       format.html { redirect_to user_path(@user) }
       format.xml  { head :ok }
     end
+  end
+  
+  def reminder_authorization_required
+    if !allowed_to_view_reminder_action?
+      flash[:error] = "You are not allowed to access that page!"      
+      redirect_to_stored
+      return
+    end
+  end
+  
+  def allowed_to_view_reminder_action?
+    return current_user.id.to_s == params[:user_id] || current_user.username == params[:user_id]
   end
 end

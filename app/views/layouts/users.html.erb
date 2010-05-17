@@ -5,11 +5,14 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>Dream Remind: <%= controller.action_name %></title>
-  <%= stylesheet_link_tag 'scaffold' %>
+  <%= stylesheet_link_tag 'main' %>
 </head>
 <body>
 
-<p style="color: green"><%= flash[:notice] %></p>
+<!--<p style="color: green"><%= flash[:notice] %></p>-->
+<% flash.each do |key, value| -%>
+  <div class="<%= key %>"><%= value %></div>
+<% end -%>
 
 <%= yield %>
 
