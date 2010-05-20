@@ -12,56 +12,54 @@ pre {
   font-size: 11px;
 }
 
-a { color: #000; }
+a { color: #006699; text-decoration: none; }
 a:visited { color: #666; }
-a:hover { color: #fff; background-color:#000; }
+a:hover { text-decoration: underline; }
 
 .fieldWithErrors {
   padding: 2px;
-  background-color: red;
+  color: white;
+  background-color: #D8000C;
   display: table;
 }
 
 #errorExplanation {
   width: 400px;
-  border: 2px solid red;
+  border: 1px solid #D8000C;
   padding: 7px;
   padding-bottom: 12px;
   margin-bottom: 20px;
-  background-color: #f0f0f0;
+  background-color: #FFBABA;
 }
 
 #errorExplanation h2 {
+  border-bottom: 1px solid #D8000C;
   text-align: left;
   font-weight: bold;
   padding: 5px 5px 5px 15px;
   font-size: 12px;
   margin: -7px;
-  background-color: #c00;
-  color: #fff;
+  background-color: #D8000C;  
+  color: white;
 }
 
 #errorExplanation p {
-  color: #333;
+  color: #D8000C;  
   margin-bottom: 0;
   padding: 5px;
 }
 
+#errorExplanation ul {
+  background-repeat: no-repeat;
+  background-position: 0 center;
+  background-image: url('../images/message_icons/error.png');
+}
+
 #errorExplanation ul li {
+  color: #D8000C;    
+  margin-left: 15px;
   font-size: 12px;
   list-style: square;
-}
-
-ul.list-pin {
-	margin: 0;
-	padding: 0;
-}
-
-ul.list-pin li {
-	margin: 0;
-	padding: 0 0 0 16px;
-	list-style: none;
-	background: url('../images/list_icons/pin.jpg') no-repeat left center;
 }
 
 div.info, div.success, div.warning, div.error {
@@ -97,4 +95,128 @@ div.error {
 	background-image: url('../images/message_icons/error.png');	
 }
 
+ul.list-pin {
+	margin: 0;
+	padding: 0;
+}
 
+ul.list-pin li {
+	margin: 0;
+	padding: 0 0 0 16px;
+	list-style: none;
+	background: url('../images/list_icons/pin.jpg') no-repeat left center;
+}
+
+div.luxury {
+	margin: 0 0 0 15px;
+	font-size: 9.5px;
+	font-style: italic;
+	letter-spacing: 0.25em;
+}
+
+table.horizontal-minimal {
+	border-collapse:collapse;
+	/*font-family:"Lucida Sans Unicode","Lucida Grande",Sans-Serif;
+	font-size:12px;
+	margin-bottom:45px;
+	margin-left:45px;
+	margin-right:45px;
+	margin-top:45px;*/
+	text-align:left;
+	/*width:480px*/	
+}
+
+table.horizontal-minimal th {
+	background-attachment:scroll;
+	background-color:#B9C9FE;
+	background-image:none;
+	background-position:0 0;
+	background-repeat:repeat;
+	border-bottom-color:#FFFFFF;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-top-color:#AABCFE;
+	border-top-style:solid;
+	border-top-width:4px;
+	color:#003399;
+	font-size:13px;
+	font-weight:normal;
+	padding-bottom:8px;
+	padding-left:8px;
+	padding-right:8px;
+	padding-top:8px;
+}
+
+table.horizontal-minimal td {
+	background-attachment:scroll;
+	background-color:#E8EDFF;
+	background-image:none;
+	background-position:0 0;
+	background-repeat:repeat;
+	border-bottom-color:#FFFFFF;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-top-color:transparent;
+	border-top-style:solid;
+	border-top-width:1px;
+	color:#666699;
+	padding-bottom:8px;
+	padding-left:8px;
+	padding-right:8px;
+	padding-top:8px;
+}
+
+table.horizontal-minimal tbody tr:hover td {
+	background-attachment:scroll;
+	background-color:#D0DAFD;
+	background-image:none;
+	background-position:0 0;
+	background-repeat:repeat;
+	color:#333399;
+}
+
+table.horizontal-zebra {
+	border-collapse:collapse;
+	/*font-family:"Lucida Sans Unicode","Lucida Grande",Sans-Serif;
+	font-size:12px;
+	margin-bottom:45px;
+	margin-left:45px;
+	margin-right:45px;
+	margin-top:45px;*/
+	text-align:left;
+	/*width:480px;*/
+}
+
+table.horizontal-zebra th {
+	color:#003399;
+	background-color:#D0DAFD;
+	/*font-size:14px;
+	font-weight:normal;*/
+	padding-bottom:10px;
+	padding-left:8px;
+	padding-right:8px;
+	padding-top:10px;
+}
+table.horizontal-zebra td {
+	color:#666699;
+	padding-bottom:8px;
+	padding-left:8px;
+	padding-right:8px;
+	padding-top:8px;
+}
+table.horizontal-zebra .odd {
+	background-attachment:scroll;
+	background-color:#E8EDFF;
+	background-image:none;
+	background-position:0 0;
+	background-repeat:repeat;
+}
+
+table.horizontal-zebra tbody tr:hover td {
+	background-attachment:scroll;
+	background-color:#D0DAFD;
+	background-image:none;
+	background-position:0 0;
+	background-repeat:repeat;
+	color:#333399;
+}

@@ -1,19 +1,34 @@
 <h1>Dream Remind</h1>
+<div class="luxury">... We remember while you sleep</div>
 <% if logged_in? %>
-	<h2>Welcome, <%= current_user.username %></h2><br />
+	<h3>Welcome, <%= current_user.username %></h3><br />
 	
+		<!--
 		<strong>Reminders</strong>
-		<%= link_to '(add new reminder)', new_user_reminder_path(current_user) %><br /><br />
+		(<%= link_to 'add new reminder', new_user_reminder_path(current_user) %>)<br />
+		-->
 		
-		<table>
-		  <tr>
-		    <th>Category</th>
-		    <th>Date</th>
-		    <th>Description</th>
-		  </tr>
-		
+		<table class="horizontal-zebra">
+		  <thead>
+		  	<tr>
+		  	  <th><strong>Reminders</strong></th>
+			  <th>(<%= link_to 'add new reminder', new_user_reminder_path(current_user) %>)</th>
+			  <th></th>
+			  <th></th>
+			  <th></th>
+			  <th></th>			  
+		    <tr>
+		      <th>Category</th>
+		      <th>Date</th>
+		      <th>Description</th>
+			  <th></th>
+			  <th></th>
+			  <th></th>
+		    </tr>
+		  </thead>
+		<tbody>
 		<% @reminders.each do |reminder| %>
-		  <tr>	  	
+		  <tr class="<%= cycle("odd", "even") %>">	  	
 		    <td><%=h reminder.category.name %></td>
 		    <td><%=h pretty_date(reminder.date) %></td>
 		    <td><%=h reminder.description %></td>
@@ -22,9 +37,10 @@
 		    <td><%= link_to 'Destroy', user_reminder_path(@user, reminder), :confirm => 'Are you sure you want to delete the reminder?', :method => :delete %></td>
 		  </tr>
 		<% end %>
+		</tbody>
 		</table>	
 	
-	<br />			
+	<br /><br />			
 
 	<%= link_to 'Edit Profile', edit_user_path(@user) %> |
 	<%= link_to 'Manage Categories', user_categories_path(@user) %> |
