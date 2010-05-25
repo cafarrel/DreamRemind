@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     if session[:user]
       return true
     end
-    flash[:info] = 'Please login to continue'
+    flash[:warning] = 'Please login to continue'
     session[:return_to] = request.request_uri
     redirect_to login_path
     return false
@@ -22,11 +22,6 @@ class ApplicationController < ActionController::Base
     return session[:user]
   end  
   helper_method :current_user
-  
-  def has_reminders?
-    return current_user.reminders.size > 0
-  end
-  helper_method :has_reminders?
   
   def logged_in?
     return current_user != nil

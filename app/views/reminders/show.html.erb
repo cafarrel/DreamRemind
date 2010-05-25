@@ -1,18 +1,23 @@
-<p>
-  <b>Category:</b>
-  <%=h @category.name %>
-</p>
+<div class="horizontal-zebra">
+	<p class="head">
+		<b>Reminder</b>
+	</p>
+	<p class="odd">
+	  <b>Category:</b>
+	  <%=h @category.name %>
+	</p>	
+	<p>
+	  <b>Date:</b>
+	  <%=h pretty_date(@reminder.date) %>
+	</p>
+	
+	<p class="odd">
+	  <b>Description:</b>
+	  <%=h @reminder.description %>
+	</p>
+</div>
 
-<p>
-  <b>Date:</b>
-  <%=h pretty_date(@reminder.date) %>
-</p>
+<br />
 
-<p>
-  <b>Description:</b>
-  <%=h @reminder.description %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_reminder_path(current_user, @reminder) %> |
-<%= link_to 'Back', current_user %>
+<%= link_to 'Back', current_user %> |
+<%= link_to 'Edit', edit_user_reminder_path(current_user, @reminder) %>

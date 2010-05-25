@@ -1,44 +1,44 @@
 <h1>Dream Remind</h1>
 <div class="luxury">... We remember while you sleep</div>
+
 <% if logged_in? %>
-	<h3>Welcome, <%= current_user.username %></h3><br />
-	
-		<!--
-		<strong>Reminders</strong>
-		(<%= link_to 'add new reminder', new_user_reminder_path(current_user) %>)<br />
-		-->
+	<br />	
+	Welcome, <b><%= @user.username %></b>		
+	<br /><br />
 		
-		<table class="horizontal-zebra">
-		  <thead>
-		  	<tr>
-		  	  <th><strong>Reminders</strong></th>
-			  <th>(<%= link_to 'add new reminder', new_user_reminder_path(current_user) %>)</th>
-			  <th></th>
-			  <th></th>
-			  <th></th>
-			  <th></th>			  
-		    <tr>
-		      <th>Category</th>
-		      <th>Date</th>
-		      <th>Description</th>
-			  <th></th>
-			  <th></th>
-			  <th></th>
-		    </tr>
-		  </thead>
-		<tbody>
-		<% @reminders.each do |reminder| %>
-		  <tr class="<%= cycle("odd", "even") %>">	  	
-		    <td><%=h reminder.category.name %></td>
-		    <td><%=h pretty_date(reminder.date) %></td>
-		    <td><%=h reminder.description %></td>
-			<td><%= link_to 'View', user_reminder_path(@user, reminder) %></td>  	    
-			<td><%= link_to 'Edit', edit_user_reminder_path(@user, reminder) %></td>    
-		    <td><%= link_to 'Destroy', user_reminder_path(@user, reminder), :confirm => 'Are you sure you want to delete the reminder?', :method => :delete %></td>
-		  </tr>
-		<% end %>
-		</tbody>
-		</table>	
+		<% if @reminders.size > 0 %>	
+			<table class="horizontal-zebra">
+			  <thead>
+			  	<tr>
+			  	  <th colspan="2"><strong>Reminders</strong> (<%= link_to 'add new reminder', new_user_reminder_path(current_user) %>)</th>
+				  <th></th>
+				  <th></th>
+				  <th></th>
+				  <th></th>			  
+			    <tr>
+			      <th>Category</th>
+			      <th>Date</th>
+			      <th>Description</th>
+				  <th colspan="2">Options</th>			  
+				  <th></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+				<% @reminders.each do |reminder| %>
+					  <tr class="<%= cycle("odd", "even") %>">	  	
+					    <td><%=h reminder.category.name %></td>
+					    <td><%=h pretty_date(reminder.date) %></td>
+					    <td><%=h reminder.description %></td>
+						<td><%= link_to 'View', user_reminder_path(@user, reminder) %></td>  	    
+						<td><%= link_to 'Edit', edit_user_reminder_path(@user, reminder) %></td>    
+					    <td><%= link_to 'Delete', user_reminder_path(@user, reminder), :confirm => 'Are you sure you want to delete the reminder?', :method => :delete %></td>
+					  </tr>
+				<% end %>
+			  </tbody>
+			</table>
+		<% else %>
+			<strong>No Reminders</strong> (<%= link_to 'add new reminder', new_user_reminder_path(current_user) %>)
+		<% end %>	
 	
 	<br /><br />			
 
@@ -46,9 +46,3 @@
 	<%= link_to 'Manage Categories', user_categories_path(@user) %> |
 	<%= link_to 'Logout', logout_path %>
 <% end %>
-
-<% if !logged_in? %>
-	<%= link_to 'Login', login_path %> |	
-	<%= link_to 'Forgot Password', forgot_password_path %> |
-	<%= link_to 'New user', new_user_path %>
-<% end %>      

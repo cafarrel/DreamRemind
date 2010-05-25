@@ -184,7 +184,7 @@ table.horizontal-zebra {
 	margin-right:45px;
 	margin-top:45px;*/
 	text-align:left;
-	/*width:480px;*/
+	width: 600px;
 }
 
 table.horizontal-zebra th {
@@ -197,6 +197,7 @@ table.horizontal-zebra th {
 	padding-right:8px;
 	padding-top:10px;
 }
+
 table.horizontal-zebra td {
 	color:#666699;
 	padding-bottom:8px;
@@ -204,6 +205,7 @@ table.horizontal-zebra td {
 	padding-right:8px;
 	padding-top:8px;
 }
+
 table.horizontal-zebra .odd {
 	background-attachment:scroll;
 	background-color:#E8EDFF;
@@ -219,4 +221,59 @@ table.horizontal-zebra tbody tr:hover td {
 	background-position:0 0;
 	background-repeat:repeat;
 	color:#333399;
+}
+
+div.horizontal-zebra {
+	border-collapse:collapse;
+	/*font-family:"Lucida Sans Unicode","Lucida Grande",Sans-Serif;
+	font-size:12px;
+	margin-bottom:45px;
+	margin-left:45px;
+	margin-right:45px;
+	margin-top:45px;*/	
+	text-align:left;
+	width:250px;
+}
+
+div.horizontal-zebra p.head {
+	color:#003399;
+	background-color:#D0DAFD;
+	/*font-size:14px;
+	font-weight:normal;*/
+	padding-bottom:10px;
+	padding-left:8px;
+	padding-right:8px;
+	padding-top:10px;	
+	margin: 0;
+}
+
+div.horizontal-zebra p {
+	color:#666699;
+	padding-bottom:8px;
+	padding-left:8px;
+	padding-right:8px;
+	padding-top:8px;
+	margin: 0;
+}
+
+
+div.horizontal-zebra p.odd {
+	background-attachment:scroll;
+	background-color:#E8EDFF;
+	background-image:none;
+	background-position:0 0;
+	background-repeat:repeat;
+}
+
+div.horizontal-zebra p:hover {
+	background-attachment:scroll;
+	background-color:#D0DAFD;
+	background-image:none;
+	background-position:0 0;
+	background-repeat:repeat;
+	color:#333399;
+}
+
+h3.no-margin {
+	margin: 0;
 }

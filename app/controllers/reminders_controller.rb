@@ -56,7 +56,7 @@ class RemindersController < ApplicationController
     respond_to do |format|
       if @reminder.save
         flash[:success] = 'Reminder was successfully created.'        
-        format.html { redirect_to @user }
+        format.html { redirect_to user_path(@user) }        
         #format.xml  { render :xml => @reminder, :status => :created, :location => @reminder }
       else
         #format.html { render :action => "new" }
@@ -73,7 +73,7 @@ class RemindersController < ApplicationController
     respond_to do |format|
       if @reminder.update_attributes(params[:reminder])
         flash[:success] = 'Reminder was successfully updated.'
-        format.html { redirect_to(current_user) }
+        format.html { redirect_to(@user) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

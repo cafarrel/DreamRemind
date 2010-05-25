@@ -6,11 +6,17 @@
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>Dream Remind</title>
   <%= stylesheet_link_tag 'main' %>
+  <%= javascript_include_tag :defaults %>
 </head>
 <body>
 
 <% flash.each do |key, value| -%>
-  <div class="<%= key %>"><%= value %></div>
+  <div id="flash-div" class="<%= key %>">  	
+	<%= value %>
+  </div>
+  <% content_tag :script, :type => "text/javascript" do -%>
+	setTimeout("new Effect.Fade('flash-div');", 10000);
+  <% end %>
 <% end -%>
 
 <%= yield %>
