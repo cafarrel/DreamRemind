@@ -10,16 +10,15 @@
 			<table class="horizontal-zebra">
 			  <thead>
 			  	<tr>
-			  	  <th colspan="2"><strong>Reminders</strong> (<%= link_to 'add new reminder', new_user_reminder_path(current_user) %>)</th>
-				  <th></th>
+			  	  <th colspan="3"><strong class="title">Reminders</strong> (<%= link_to 'add new reminder', new_user_reminder_path(current_user) %>)</th>				  
 				  <th></th>
 				  <th></th>
 				  <th></th>			  
 			    <tr>
-			      <th>Category</th>
-			      <th>Date</th>
-			      <th>Description</th>
-				  <th colspan="2">Options</th>			  
+			      <th class="sortable"><%= sort_link 'Category', :name %></th>
+			      <th class="sortable"><%= sort_link 'Date', :date %></th>
+			      <th class="sortable"><%= sort_link 'Description', :description %></th>
+				  <th colspan="2" class="unsortable">Options</th>			  
 				  <th></th>
 			    </tr>
 			  </thead>

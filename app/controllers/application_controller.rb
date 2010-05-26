@@ -43,4 +43,7 @@ class ApplicationController < ActionController::Base
     redirect_to :controller => 'users', :action => 'index'
   end
   
+  def sort_order(default)
+      "#{(params[:col] || default.to_s).gsub(/[\s;'\"]/,'')} #{params[:dir] == 'down' ? 'DESC' : 'ASC'}"
+  end     
 end

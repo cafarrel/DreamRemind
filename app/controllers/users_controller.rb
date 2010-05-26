@@ -73,7 +73,7 @@ class UsersController < ApplicationController
     
     if logged_in?
       @user = User.find_by_username(params[:id])
-      @reminders = Reminder.find(:all, :conditions => ["user_id = ?", @user.id])      
+      @reminders = Reminder.find(:all, :conditions => ["user_id = ?", @user.id], :joins => :category, :order => sort_order("name"))      
     end    
 
     respond_to do |format|

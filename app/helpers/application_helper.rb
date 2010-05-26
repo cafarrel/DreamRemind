@@ -15,5 +15,20 @@ module ApplicationHelper
     end
   
     html
-  end  
+  end
+  
+  def sort_link(title, column)    
+    sort_dir = params[:dir] == 'down' ? 'up' : 'down'      
+    
+    arrow(column) << link_to(title, request.parameters.merge( {:col => column, :dir => sort_dir} ))
+  end
+  
+  def arrow(column)
+    if (params[:col].to_s == column.to_s)
+      params[:dir]== "down" ? "&#8595;" : "&#8593;"
+    else
+      ""
+    end
+  end 
+  
 end

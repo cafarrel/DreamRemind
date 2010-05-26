@@ -198,6 +198,11 @@ table.horizontal-zebra th {
 	padding-top:10px;
 }
 
+table.horizontal-zebra th strong.title {	
+	font-size:15px;
+	font-weight: bold;	
+}
+
 table.horizontal-zebra td {
 	color:#666699;
 	padding-bottom:8px;
@@ -217,11 +222,20 @@ table.horizontal-zebra .odd {
 table.horizontal-zebra tbody tr:hover td {
 	background-attachment:scroll;
 	background-color:#D0DAFD;
+	/*background-color: #FFE2C8;*/
 	background-image:none;
 	background-position:0 0;
 	background-repeat:repeat;
 	color:#333399;
 }
+
+table.horizontal-zebra th.sortable a { 
+	color: #484848; 
+	border-bottom-width: thin;
+	border-bottom-style: dashed; 
+	border-collapse: collapse;
+}
+table.horizontal-zebra th.unsortable { color: #484848; }
 
 div.horizontal-zebra {
 	border-collapse:collapse;
