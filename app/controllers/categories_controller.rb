@@ -42,6 +42,20 @@ class CategoriesController < ApplicationController
     
   end
   
+  def destroy
+    @user = User.find_by_username(params[:user_id])
+    @category_mapping = UserCategory.find_by_category_id_and_user_id(params[:id], @user.id)
+    
+    @category_mapping.destroy
+    
+    flash[:success] = "Category successfully deleted!"
+    
+    respond_to do |format|
+      format.html { redirect_to user_categories_path(@user) }
+      format.xml  { head :ok }
+    end
+  end
+  
   def category_authorization_required
     if !allowed_to_view_category_action?
       flash[:error] = "You are not allowed to access that page!"      

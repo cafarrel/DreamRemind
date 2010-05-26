@@ -10,14 +10,7 @@
 </head>
 <body>
 
-<% flash.each do |key, value| -%>
-  <div id="flash-div" class="<%= key %>">  	
-	<%= value %>
-  </div>
-  <% content_tag :script, :type => "text/javascript" do -%>
-	setTimeout("new Effect.Fade('flash-div');", 10000);
-  <% end %>
-<% end -%>
+<%= show_flash_message %>
 
 <%= yield %>
 

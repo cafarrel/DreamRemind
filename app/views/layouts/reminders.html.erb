@@ -6,12 +6,11 @@
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>DreamRemind - Reminders</title>
   <%= stylesheet_link_tag 'main' %>
+  <%= javascript_include_tag :defaults %>
 </head>
 <body>
 
-<% flash.each do |key, value| -%>
-  <div class="<%= key %>"><%= value %></div>
-<% end -%>
+<%= show_flash_message %>
 
 <%= yield %>
 

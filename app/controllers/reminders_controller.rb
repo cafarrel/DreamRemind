@@ -68,6 +68,7 @@ class RemindersController < ApplicationController
   # PUT /reminders/1
   # PUT /reminders/1.xml
   def update
+    @user = User.find_by_username(params[:user_id])
     @reminder = Reminder.find(params[:id])
 
     respond_to do |format|

@@ -9,7 +9,7 @@
   </p>
   <p>
     <%= f.label :date %><br />
-    <%= f.date_select :date, :start_year => Date.today.year + 10, :end_year => 1900%>
+    <%= f.date_select :date, :include_blank => true, :start_year => Date.today.year + 10, :end_year => 1900%>
   </p>
   <p>
     <%= f.label :description %><br />
