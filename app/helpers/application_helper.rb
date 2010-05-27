@@ -25,7 +25,8 @@ module ApplicationHelper
   
   def arrow(column)
     if (params[:col].to_s == column.to_s)
-      params[:dir]== "down" ? "&#8595;" : "&#8593;"
+      #params[:dir]== "down" ? "&#8595;" : "&#8593;"
+      params[:dir]== "down" ? "&#8681;" : "&#8679;"
     else
       ""
     end

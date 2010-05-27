@@ -183,8 +183,8 @@ table.horizontal-zebra {
 	margin-left:45px;
 	margin-right:45px;
 	margin-top:45px;*/
-	text-align:left;
-	width: 600px;
+	text-align:left;	
+	width: 600px;	
 }
 
 table.horizontal-zebra th {
@@ -195,7 +195,11 @@ table.horizontal-zebra th {
 	padding-bottom:10px;
 	padding-left:8px;
 	padding-right:8px;
-	padding-top:10px;
+	padding-top:10px;	
+}
+
+table.horizontal-zebra td.date {
+	width: 130px;	
 }
 
 table.horizontal-zebra th strong.title {	
@@ -208,7 +212,10 @@ table.horizontal-zebra td {
 	padding-bottom:8px;
 	padding-left:8px;
 	padding-right:8px;
-	padding-top:8px;
+	padding-top:8px;	
+	/*text-overflow: clip;
+	white-space: nowrap;	
+	overflow: hidden;*/
 }
 
 table.horizontal-zebra .odd {
@@ -221,12 +228,12 @@ table.horizontal-zebra .odd {
 
 table.horizontal-zebra tbody tr:hover td {
 	background-attachment:scroll;
-	background-color:#D0DAFD;
-	/*background-color: #FFE2C8;*/
+	/*background-color:#D0DAFD;*/
+	background-color: #FFE2C8;
 	background-image:none;
 	background-position:0 0;
 	background-repeat:repeat;
-	color:#333399;
+	/*color:#333399;*/
 }
 
 table.horizontal-zebra th.sortable a { 
@@ -249,15 +256,15 @@ div.horizontal-zebra {
 	width:250px;
 }
 
-div.horizontal-zebra p.head, li.head {
+div.horizontal-zebra p.head {
 	color:#003399;
 	background-color:#D0DAFD;
 	/*font-size:14px;
 	font-weight:normal;*/
-	padding-bottom:10px;
+	padding-bottom:8px;
 	padding-left:8px;
 	padding-right:8px;
-	padding-top:10px;	
+	padding-top:8px;	
 	margin: 0;
 }
 
@@ -269,6 +276,11 @@ div.horizontal-zebra p, ul {
 	padding-right:8px;
 	padding-top:8px;
 	margin: 0;
+}
+
+div.horizontal-zebra li {	
+	padding-top: 1px;
+	margin-bottom: 2px;
 }
 
 /*

@@ -1,6 +1,6 @@
 <div class="horizontal-zebra">
 	<p class="head">
-		<b>Reminder</b>
+		<b><%=h @reminder.description%></b>
 	</p>
 	<p class="odd">
 	  <b>Category:</b>
@@ -10,11 +10,12 @@
 	  <b>Date:</b>
 	  <%=h pretty_date(@reminder.date) %>
 	</p>
-	
+	<!--
 	<p class="odd">
 	  <b>Description:</b>
 	  <%=h @reminder.description %>
 	</p>
+	-->
 </div>
 
 <br />

@@ -1,7 +1,9 @@
-<h1>Dream Remind</h1>
-<div class="luxury">... We remember while you sleep</div>
+<div id="header">
+	<h1>Dream Remind</h1>
+	<div class="luxury">... We remember while you sleep</div>
+</div>
 
-<% if logged_in? %>
+<div id="content">
 	<br />	
 	Welcome, <b><%= @user.username %></b>		
 	<br /><br />
@@ -26,8 +28,8 @@
 				<% @reminders.each do |reminder| %>
 					  <tr class="<%= cycle("odd", "even") %>">	  	
 					    <td><%=h reminder.category.name %></td>
-					    <td><%=h pretty_date(reminder.date) %></td>
-					    <td><%=h reminder.description %></td>
+					    <td class="date"><%=h pretty_date(reminder.date) %></td>
+					    <td class="description"><%=h reminder.description %></td>
 						<td><%= link_to 'View', user_reminder_path(@user, reminder) %></td>  	    
 						<td><%= link_to 'Edit', edit_user_reminder_path(@user, reminder) %></td>    
 					    <td><%= link_to 'Delete', user_reminder_path(@user, reminder), :confirm => 'Are you sure you want to delete the reminder?', :method => :delete %></td>
@@ -40,8 +42,10 @@
 		<% end %>	
 	
 	<br /><br />			
+</div>
 
+<div id="footer">
 	<%= link_to 'Edit Profile', edit_user_path(@user) %> |
 	<%= link_to 'Manage Categories', user_categories_path(@user) %> |
 	<%= link_to 'Logout', logout_path %>
-<% end %>
+</div>
