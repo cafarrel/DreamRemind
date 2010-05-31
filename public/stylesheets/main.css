@@ -283,13 +283,13 @@ div.horizontal-zebra li {
 	margin-bottom: 2px;
 }
 
-/*
-div.horizontal-zebra p.odd {
-	background-attachment:scroll;
-	background-color:#E8EDFF;
+
+div.horizontal-zebra li:hover {	
+	background-attachment:scroll;	
+	background-color: #FFE2C8;
 	background-image:none;
 	background-position:0 0;
-	background-repeat:repeat;
+	background-repeat:repeat;	
 }
 
 div.horizontal-zebra p:hover {
@@ -300,4 +300,4 @@ div.horizontal-zebra p:hover {
 	background-repeat:repeat;
 	color:#333399;
 }
-*/
+

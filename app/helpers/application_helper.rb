@@ -10,8 +10,8 @@ module ApplicationHelper
   def show_flash_message
     html = ''
     flash.each do |key, value|  
-      html = content_tag(:div, value, :class => key, :id => "flash-div")
-      html << content_tag(:script, "setTimeout(\"new Effect.Fade('flash-div');\", 10000);", :type => "text/javascript")  
+      html = content_tag(:div, content_tag(:div, value, :class =>key) << '<br />', :id => "flash-div")
+      html << content_tag(:script, "setTimeout(\"new Effect.Fade('flash-div');\", 10000);", :type => "text/javascript")      
     end
   
     html
@@ -31,5 +31,10 @@ module ApplicationHelper
       ""
     end
   end 
+  
+  def greeting
+    greetings = ['Hi', 'Hello', 'Welcome', 'Greetings', 'Hey']
+    greetings[rand(greetings.size)]
+  end
   
 end

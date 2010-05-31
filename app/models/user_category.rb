@@ -1,3 +1,16 @@
+# == Schema Information
+# Schema version: 20100531054318
+#
+# Table name: user_categories
+#
+#  id          :integer         not null, primary key
+#  category_id :integer
+#  user_id     :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#  active      :boolean
+#
+
 class UserCategory < ActiveRecord::Base
   belongs_to :category
   belongs_to :user

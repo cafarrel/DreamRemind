@@ -1,27 +1,35 @@
-<h1>Reminders for <%= @user.username %></h1>
+<h2>Your Reminders</h2>
+<br />
 
-<table>
-  <tr>
-  	<th>User</th>
-    <th>Category</th>
-    <th>Date</th>
-    <th>Description</th>
-  </tr>
-
-<% @reminders.each do |reminder| %>
-  <tr>
-  	<td><%=h reminder.user_id %></td>
-    <td><%=h reminder.category_id %></td>
-    <td><%=h pretty_date(reminder.date) %></td>
-    <td><%=h reminder.description %></td>
-    <td><%= link_to 'Show', user_reminder_path(@user, reminder) %></td>
-    <td><%= link_to 'Edit', edit_user_reminder_path(@user, reminder) %></td>
-    <td><%= link_to 'Destroy', user_reminder_path(@user, reminder), :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% @categories.each do |category| %>
+	<table class="horizontal-zebra">
+	  <tr>
+		<th colspan="3"><strong class="title"><%=h category.category.name %> Reminders</strong> (<%= link_to 'add new', new_user_reminder_path(current_user) %>)</th>				  
+	    <th></th>
+	    <th></th>	    
+	  </tr>
+	  <tr>
+		<!--<th class="unsortable">Category</th>-->
+	    <th class="sortable"><%= sort_link 'Date', :date %></th>
+	    <th class="sortable"><%= sort_link 'Description', :description %></th>
+		<th class="unsortable" colspan="2">Options</th>
+		<th></th>
+	  </tr>
+	
+	  <% @reminders[category.category.id].each do |reminder| %>
+	    <tr class="<%= cycle('even', 'odd')%>">  	
+	      <!--<td><%=h reminder.category.name %></td>-->
+	      <td><%=h pretty_date(reminder.date) %></td>
+	      <td><%=h reminder.description %></td>
+	      <td><%= link_to 'Show', user_reminder_path(@user, reminder) %></td>
+	      <td><%= link_to 'Edit', edit_user_reminder_path(@user, reminder) %></td>
+	      <td><%= link_to 'Delete', user_reminder_path(@user, reminder), :confirm => 'Are you sure?', :method => :delete %></td>
+	    </tr>
+	  <% end %>
+	</table>
+	<br/><br/>
 <% end %>
-</table>
 
 <br />
 
-<%= link_to 'Profile', @user %> |
-<%= link_to 'New reminder', new_user_reminder_path(@user) %>
+<%= link_to 'Back', @user %>

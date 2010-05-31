@@ -1,4 +1,4 @@
-<h1>Editing user</h1>
+<h2>Edit Your Profile</h2>
 
 <% form_for(@user) do |f| %>
   <%= f.error_messages %>
@@ -27,7 +27,7 @@
     <%= f.submit 'Update' %>
   </p>
 <% end %>
-
+<br />
 <%= link_to 'Back', @user %> |
 <%= link_to 'Change Password', change_password_path %> |
 <%= link_to 'Delete Account', user_path, :confirm => "Are you sure you wish to permanently delete your account? All of your reminders will also be removed forever.", :method => :delete %>

@@ -1,3 +1,17 @@
+# == Schema Information
+# Schema version: 20100531054318
+#
+# Table name: reminders
+#
+#  id          :integer         not null, primary key
+#  category_id :integer
+#  user_id     :integer
+#  date        :date
+#  description :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class Reminder < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
