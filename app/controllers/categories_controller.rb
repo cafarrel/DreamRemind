@@ -27,11 +27,11 @@ class CategoriesController < ApplicationController
     
     if @existing_category.nil?
       @category.save
-      UserCategory.create(:category_id => @category.id, :user_id => @user.id)
+      UserCategory.create(:category_id => @category.id, :user_id => @user.id, :active => true)
       flash[:success] = "Category successfully saved!"
     else
       if !UserCategory.record_exists?(@existing_category.id, @user.id)      
-        UserCategory.create(:category_id => @existing_category.id, :user_id => @user.id)
+        UserCategory.create(:category_id => @existing_category.id, :user_id => @user.id, :active => true)
         flash[:success] = "Category successfully saved!"
       else
         flash[:error] = "You already have that category!"
