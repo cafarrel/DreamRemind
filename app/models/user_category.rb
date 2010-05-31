@@ -16,11 +16,11 @@ class UserCategory < ActiveRecord::Base
   belongs_to :user
   
   def self.populate_initial_categories(user_id)
-    create(:category_id => 1, :user_id => user_id)
-    create(:category_id => 2, :user_id => user_id)
-    create(:category_id => 3, :user_id => user_id)
-    create(:category_id => 4, :user_id => user_id)
-    create(:category_id => 5, :user_id => user_id)  
+    create(:category_id => 1, :user_id => user_id, :active => false)
+    create(:category_id => 2, :user_id => user_id, :active => false)
+    create(:category_id => 3, :user_id => user_id, :active => false)
+    create(:category_id => 4, :user_id => user_id, :active => false)
+    create(:category_id => 5, :user_id => user_id, :active => false)  
   end
   
   def self.update_active_flags

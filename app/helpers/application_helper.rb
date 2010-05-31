@@ -37,4 +37,7 @@ module ApplicationHelper
     greetings[rand(greetings.size)]
   end
   
+  def view_link(title, type)    
+    link_to(title, request.parameters.merge( {:view => type} ))
+  end
 end

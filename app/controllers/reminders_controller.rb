@@ -8,12 +8,17 @@ class RemindersController < ApplicationController
   def index
     @user = User.find_by_username(params[:user_id])
     @categories = UserCategory.find(:all, :conditions => ["user_id = ? AND active = ?", @user.id, true], :joins => :category, :order => "name")    
+    @view_type = params[:view] == 'standard' ? 'standard' : 'category-based'
     
-    @reminders = Hash.new
-    @categories.each do |c|
-     @reminders[c.category.id] = Reminder.find_all_by_user_id_and_category_id(@user.id, c.category_id) 
+    if @view_type == 'standard'
+      @reminders = Reminder.find(:all, :conditions => ["user_id = ?", @user.id], :joins => :category, :order => sort_order("name"))
+    else
+      @reminders = Hash.new
+      @categories.each do |c|
+        @reminders[c.category.id] = Reminder.find_all_by_user_id_and_category_id(@user.id, c.category_id)
+      end
     end
-    
+                   
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @reminders }

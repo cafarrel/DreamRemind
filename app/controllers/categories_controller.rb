@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
   
   before_filter :login_required
-  before_filter :category_authorization_required, :only => ['new', 'index', 'show', 'edit', 'create', 'update', 'destroy']  
+  before_filter :category_authorization_required  
   
   def new
     @category = Category.new
@@ -15,8 +15,8 @@ class CategoriesController < ApplicationController
   def index
     @user = User.find_by_username(params[:user_id])
     
-    @categories = Category.find(:all)
-    @user_categories = @user.categories
+    @categories = Category.find(:all, :order => "name")    
+    @user_categories = @user.categories.sort {|x,y| x.name <=> y.name}
   end
   
   def create
@@ -27,11 +27,11 @@ class CategoriesController < ApplicationController
     
     if @existing_category.nil?
       @category.save
-      UserCategory.create(:category_id => @category.id, :user_id => @user.id, :active => true)
+      UserCategory.create(:category_id => @category.id, :user_id => @user.id, :active => false)
       flash[:success] = "Category successfully saved!"
     else
       if !UserCategory.record_exists?(@existing_category.id, @user.id)      
-        UserCategory.create(:category_id => @existing_category.id, :user_id => @user.id, :active => true)
+        UserCategory.create(:category_id => @existing_category.id, :user_id => @user.id, :active => false)
         flash[:success] = "Category successfully saved!"
       else
         flash[:error] = "You already have that category!"
