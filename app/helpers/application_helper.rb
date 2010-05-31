@@ -37,7 +37,11 @@ module ApplicationHelper
     greetings[rand(greetings.size)]
   end
   
-  def view_link(title, type)    
-    link_to(title, request.parameters.merge( {:view => type} ))
+  def view_link(title, type)
+    html = link_to(title, request.parameters.merge( {:view => type} ))
+    if params[:view] == type or (!params[:view] and type == 'category-based')
+      html = '<strong>'  + html + '</strong>'
+    end 
+    html
   end
 end
