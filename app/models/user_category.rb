@@ -23,7 +23,7 @@ class UserCategory < ActiveRecord::Base
     create(:category_id => 5, :user_id => user_id)  
   end
   
-  def update_active_flags
+  def self.update_active_flags
     find(:all).each do |mapping|
       mapping.active = true
       mapping.save
